@@ -1,27 +1,7 @@
-/* vim: set shiftwidth=2 tabstop=2 autoindent cindent expandtab filetype=javascript : */
 /** 
  * @license pdf2htmlEX.js: Core UI functions for pdf2htmlEX 
  * Copyright 2012,2013 Lu Wang <coolwanglu@gmail.com> and other contributors 
  * https://github.com/coolwanglu/pdf2htmlEX/blob/master/share/LICENSE 
- */
-
-/*
- * Attention:
- * This files is to be optimized by closure-compiler, 
- * so pay attention to the forms of property names:
- *
- * string/bracket form is safe, won't be optimized:
- * var obj={ 'a':'b' }; obj['a'] = 'b';
- * name/dot form will be optimized, the name is likely to be modified:
- * var obj={ a:'b' }; obj.a = 'b';
- *
- * Either form can be used for internal objects, 
- * but must be consistent for each one respectively.
- *
- * string/bracket form must be used for external objects
- * e.g. DEFAULT_CONFIG, object stored in page-data
- * property names are part of the `protocol` in these cases.
- *
  */
 
 'use strict';
@@ -156,7 +136,7 @@ function Page(page) {
 
   // if page is loaded
   if (content_box) {
-    console.log("->" + this.num)
+    console.log("-> " + this.num)
     this.content_box = content_box;
     /*
      * scale ratios
@@ -310,7 +290,6 @@ Viewer.prototype = {
 
     var self = this;
 
-    console.log(document.location.hash.substring(1))
     if (this.config['hashchange_handler']) {
       window.addEventListener('hashchange', function(e) {
         self.navigate_to_dest(document.location.hash.substring(1));
@@ -357,7 +336,6 @@ Viewer.prototype = {
         var p = new Page(cur_node);
         new_pages.push(p);
         new_page_map[p.num] = new_pages.length - 1;
-        console.log(p.num)
       }
     }
     this.pages = new_pages;
@@ -807,7 +785,6 @@ Viewer.prototype = {
    * @param{Event} e
    */
   link_handler : function (e) {
-    console.log("linky")
     var target = /** @type{Node} */(e.target);
     var detail_str = /** @type{string} */ (target.getAttribute('data-dest-detail'));
     if (!detail_str) return;
@@ -863,7 +840,6 @@ Viewer.prototype = {
       cur_pos = cur_page.view_position();
       cur_pos = transform(cur_page.ictm, [cur_pos[0], cur_page.height()-cur_pos[1]]);
     }
-    console.log("pos: " + cur_pos);
 
     var zoom = this.scale;
     var pos = [0,0];
@@ -944,7 +920,6 @@ Viewer.prototype = {
    * @param{Array.<number>=} pos [x,y] where (0,0) is the top-left corner
    */
   scroll_to : function(page_idx, pos) {
-    console.log("scroll")
     var pl = this.pages;
     if ((page_idx < 0) || (page_idx >= pl.length)) return;
     var target_page = pl[page_idx];
